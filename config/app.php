@@ -1,4 +1,4 @@
-<?php
+    <?php
 return [
     /**
      * Debug Level:
@@ -216,9 +216,9 @@ return [
              * the following line and set the port accordingly
              */
             //'port' => 'nonstandard_port_number',
-            'username' => 'my_app',
-            'password' => 'secret',
-            'database' => 'my_app',
+            'username' => 'cakephp',
+            'password' => 'AngelF00dC4k3~',
+            'database' => 'cake_bookmarks',
             'encoding' => 'utf8',
             'timezone' => 'UTC',
             'cacheMetadata' => true,
