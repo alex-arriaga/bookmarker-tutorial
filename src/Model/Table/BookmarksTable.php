@@ -86,7 +86,12 @@ class BookmarksTable extends Table
         return $this->find()
             ->distinct(['Bookmarks.id'])
             ->matching('Tags', function ($q) use ($options) {
-                return $q->where(['Tags.title IN' => $options['tags']]);
+                return $q->where(
+                    [
+                        'Tags.title IN' => $options['tags'],
+                        // We restrict to only look for the current logged user's bookmarks
+                        'Bookmarks.user_id' => $options['user_id']
+                    ]);
             });
     }
 }
