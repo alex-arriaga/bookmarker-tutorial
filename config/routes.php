@@ -78,3 +78,19 @@ Router::scope('/', function ($routes) {
  * how to customize the loading of plugin routes.
  */
 Plugin::routes();
+
+// New route we're adding for our tagged action.
+// The trailing `*` tells CakePHP that this action has
+// passed parameters.
+Router::scope(
+    '/bookmarks',
+    ['controller' => 'Bookmarks'],
+    function ($routes) {
+        $routes->connect('/tagged/*', ['action' => 'tags']);
+    }
+);
+
+Router::scope('/', function ($routes) {
+    // Connect the default routes.
+    $routes->fallbacks('InflectedRoute');
+});
