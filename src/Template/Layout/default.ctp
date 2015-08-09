@@ -56,7 +56,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
         <div id="content">
             <?= $this->Flash->render() ?>
-
+            <?php //  We show the flash messages related with Auth ?>
+            <?= $this->Flash->render('auth') ?>
             <div class="row">
                 <?= $this->fetch('content') ?>
             </div>
