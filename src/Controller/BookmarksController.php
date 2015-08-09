@@ -51,6 +51,10 @@ class BookmarksController extends AppController
         $bookmark = $this->Bookmarks->newEntity();
         if ($this->request->is('post')) {
             $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+
+            // Setting the user_id to the current logged user
+            $bookmark->user_id = $this->Auth->user('id');
+
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success(__('The bookmark has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -58,9 +62,12 @@ class BookmarksController extends AppController
                 $this->Flash->error(__('The bookmark could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Bookmarks->Users->find('list', ['limit' => 200]);
+        // The user_id cannot be selected in the UI
+        // $users = $this->Bookmarks->Users->find('list', ['limit' => 200]);
         $tags = $this->Bookmarks->Tags->find('list', ['limit' => 200]);
-        $this->set(compact('bookmark', 'users', 'tags'));
+        //$this->set(compact('bookmark', 'users', 'tags'));
+
+        $this->set(compact('bookmark', 'tags'));
         $this->set('_serialize', ['bookmark']);
     }
 
@@ -78,6 +85,10 @@ class BookmarksController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->data);
+
+            // Setting the user_id to the current logged user
+            $bookmark->user_id = $this->Auth->user('id');
+
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success(__('The bookmark has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -85,9 +96,12 @@ class BookmarksController extends AppController
                 $this->Flash->error(__('The bookmark could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Bookmarks->Users->find('list', ['limit' => 200]);
+
+        // The user_id cannot be edited in the UI
+        // $users = $this->Bookmarks->Users->find('list', ['limit' => 200]);
         $tags = $this->Bookmarks->Tags->find('list', ['limit' => 200]);
-        $this->set(compact('bookmark', 'users', 'tags'));
+        // $this->set(compact('bookmark', 'users', 'tags'));
+        $this->set(compact('bookmark', 'tags'));
         $this->set('_serialize', ['bookmark']);
     }
 
