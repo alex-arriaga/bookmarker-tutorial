@@ -38,6 +38,10 @@ class AppController extends Controller
     {
         parent::initialize();
         $this->loadComponent('Flash');
+
+        // Component to enable REST responses
+        $this->loadComponent('RequestHandler');
+
         $this->loadComponent('Auth', [
             'authorize' => 'Controller', // We will be creating a custom autorization method (see isAuthorized() bellow)
             'authenticate' => [

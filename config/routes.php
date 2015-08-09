@@ -93,4 +93,9 @@ Router::scope(
 Router::scope('/', function ($routes) {
     // Connect the default routes.
     $routes->fallbacks('InflectedRoute');
+
+    // This allows us to have a RESTful Route for BookmarksController
+    $routes->extensions(['json', 'xml']);
+    $routes->resources('Bookmarks');
+    $routes->resources('Tags');
 });
